@@ -1,20 +1,18 @@
-#include <stdio.h>
-
-int main() {
-    int nums[] = {2, 7, 11, 15};
-    int target = 9;
-    int size = 4;
-    int i, j;
-
-    for(i = 0; i < size; i++) {
-        for(j = i + 1; j < size; j++) {
-            if(nums[i] + nums[j] == target) {
-                printf("Indices: [%d, %d]\n", i, j);
-                return 0; // stop after finding the first pair
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
+    int *result = (int*)malloc(2 * sizeof(int));
+    for (int i = 0; i < numsSize; i++) {
+        for (int j = i + 1; j < numsSize; j++) {
+            if (nums[i] + nums[j] == target) {
+                result[0] = i;
+                result[1] = j;
+                *returnSize = 2;
+                return result;  // Return when pair found
             }
         }
     }
-
-    printf("No pair found.\n");
-    return 0;
+    *returnSize = 0; // No pair found
+    return NULL;
 }
